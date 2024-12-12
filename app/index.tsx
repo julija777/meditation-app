@@ -1,34 +1,65 @@
-import { StyleSheet, Text, View } from "react-native";
+import { View, Text, Image, ImageBackground } from "react-native";
+import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
+import CustomButton from "@/components/CustomButton";
+import AppGradient from "@/components/AppGradient";
+import { useRouter } from "expo-router";
+import Animated, {
+    FadeInDown,
+    FadeInUp,
+    withSpring,
+} from "react-native-reanimated";
 
-export default function Page() {
-  return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
-      </View>
-    </View>
-  );
-}
+import beachImage from "@/assets/meditation-images/beach.webp";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 24,
-  },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
-  },
-});
+const App = () => {
+    const router = useRouter();
+
+    return (
+        <View className="flex-1">
+            <ImageBackground
+                source={beachImage}
+                resizeMode="cover"
+                className="flex-1"
+            >
+                <AppGradient
+                    // Background Linear Gradient
+                    colors={["rgba(0,0,0,0.4)", "rgba(0,0,0,0.8)"]}
+                >
+                    <SafeAreaView className="flex flex-1 px-1 justify-between">
+                        <Animated.View
+                            entering={FadeInDown.delay(300)
+                                .mass(0.5)
+                                .stiffness(80)
+                                .springify(20)}
+                        >
+                            <Text className="text-center text-white font-bold text-4xl">
+                                Simple Meditation
+                            </Text>
+                            <Text className="text-center text-white font-regular text-2xl mt-3">
+                                Simplifying Meditation for Everyone
+                            </Text>
+                        </Animated.View>
+
+                        <Animated.View
+                            entering={FadeInDown.delay(300)
+                                .mass(0.5)
+                                .stiffness(80)
+                                .springify(20)}
+                        >
+                            <CustomButton
+                                onPress={() => router.push("/nature-meditate")}
+                                title="Get Started"
+                            />
+                        </Animated.View>
+
+                        <StatusBar style="light" />
+                    </SafeAreaView>
+                </AppGradient>
+            </ImageBackground>
+        </View>
+    );
+};
+
+export default App;
