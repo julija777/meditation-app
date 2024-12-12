@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, Text, TouchableOpacity, Pressable } from 'react-native';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 interface HeaderProps {
   name: string;
@@ -9,53 +10,24 @@ interface HeaderProps {
   variant: 'light' | 'dark';
 }
 
- const Header: React.FC<HeaderProps> = ({ name, showBackButton = false, onBackPress, variant }) => {
+const Header: React.FC<HeaderProps> = ({ name, showBackButton = false, onBackPress, variant }) => {
   const isDarkMode = variant === 'dark';
 
   return (
-    <View style={[styles.container, isDarkMode ? styles.darkContainer : styles.lightContainer]}>
+    <View className={`flex-row items-center justify-between p-16 ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
       {showBackButton && (
-        <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
-          <Ionicons name="arrow-back" size={24} color={isDarkMode ? 'white' : 'black'} />
-        </TouchableOpacity>
+         <Pressable
+         onPress={() => router.back()}
+         className="right-6"
+     >
+         <AntDesign name="leftcircleo" size={50} color={isDarkMode ? 'white' : 'black'} />
+     </Pressable>
       )}
-      <Text style={[styles.text, isDarkMode ? styles.darkText : styles.lightText]}>
+      <Text className={`text-2xl font-bold mr-24 ${isDarkMode ? 'text-white' : 'text-black'}`}>
         Hello {name}!
       </Text>
-      <View style={styles.placeholder} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 64,
-  },
-  lightContainer: {
-    backgroundColor: 'white',
-  },
-  darkContainer: {
-    backgroundColor: '#1F2937',
-  },
-  backButton: {
-    marginRight: 16,
-  },
-  text: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  lightText: {
-    color: 'black',
-  },
-  darkText: {
-    color: 'white',
-  },
-  placeholder: {
-    width: 32,
-  },
-});
 
 export default Header;
