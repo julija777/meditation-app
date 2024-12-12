@@ -6,12 +6,10 @@ import { View, Text, Button } from "react-native";
 
 
 const Components = () => {
-  const userName= 'Julia'
+  const userName= 'I am Header'
   return (
         <View style={{ flex: 1 }}>
-    <Header name={userName} showBackButton={true} onBackPress={() => { } } variant="dark" />
-    {/* Rest of your screen content */}
-
+        <Header name={userName} showBackButton={true} onBackPress={() => { router.back();} } variant="dark" />
         <Button
         title="button"
           onPress={() => {}}
