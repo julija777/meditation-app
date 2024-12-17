@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ name, showBackButton = false, onBackPre
          className="right-6"
      >
          <AntDesign name="leftcircleo" size={50} color={isDarkMode ? 'white' : 'black'} />
-     </Pressable>
+        </Pressable>
       )}
       <Text className={`text-2xl font-bold mr-24 ${isDarkMode ? 'text-white' : 'text-black'}`}>
         Hello {name}!

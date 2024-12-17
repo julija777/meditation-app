@@ -17,7 +17,6 @@ const AdjustMeditationDuration = () => {
     return (
         <View className="flex-1 relative">
             <AppGradient
-                // Background Linear Gradient
                 colors={["#161b2e", "#0a4d4a", "#766e67"]}
             >
                 <Pressable
