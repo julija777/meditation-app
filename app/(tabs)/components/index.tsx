@@ -4,12 +4,13 @@ import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 
 import Header from '@/components/Header/Header';
 import { router } from 'expo-router';
-import { affirmations } from '@/localData/affirmations.json';
+import AFFIRMATION_GALLERY from '@/constants/affirmation-gallary';
+
 
 const Components = () => {
   const [messages, setMessages] = useState<IMessage[]>([]);
 
-  const userName = 'I am the Header';
+  const userName = 'Julia';
 
   useEffect(() => {
     setMessages([
@@ -29,22 +30,25 @@ const Components = () => {
   const onSend = useCallback((newMessages: IMessage[] = []) => {
     setMessages(previousMessages => GiftedChat.append(previousMessages, newMessages));
     
-  
     setTimeout(() => {
-      const randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
-      const botMessage = {
+      const randomCategory = AFFIRMATION_GALLERY[Math.floor(Math.random() * AFFIRMATION_GALLERY.length)];
+      const randomAffirmation = randomCategory.data[Math.floor(Math.random() * randomCategory.data.length)];
+      
+      const botMessage: IMessage = {
         _id: Math.round(Math.random() * 1000000),
-        text: randomAffirmation,
+        text: randomAffirmation.text,
         createdAt: new Date(),
         user: {
           _id: 2,
           name: 'Affirmation Bot',
           avatar: 'https://placeimg.com/140/140/any',
         },
+        image: randomAffirmation.image,
       };
       setMessages(previousMessages => GiftedChat.append(previousMessages, [botMessage]));
     }, 1000);
   }, []);
+  
 
   return (
     <View style={{ flex: 1 }}>

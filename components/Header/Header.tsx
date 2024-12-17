@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ name, showBackButton = false, onBackPre
         </Pressable>
       )}
       <Text className={`text-2xl font-bold mr-24 ${isDarkMode ? 'text-white' : 'text-black'}`}>
-        Hello {name}!
+        Hello {name}, let me inspire you with some affirmations!
       </Text>
     </View>
   );
