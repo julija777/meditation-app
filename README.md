@@ -5,13 +5,13 @@
 Install the project dependencies using npm:
 
 ```bash
-npm install
+npm i
 ```
 
 **Running the Project**
 
 ```bash
-npx expo start
+npm start
 ```
 
 **Expo Go**
