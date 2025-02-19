@@ -7,7 +7,7 @@ import { router } from 'expo-router';
 import AFFIRMATION_GALLERY from '@/constants/affirmation-gallary';
 
 
-const Components = () => {
+const Chat = () => {
   const [messages, setMessages] = useState<IMessage[]>([]);
 
   const userName = 'Julia';
@@ -73,4 +73,4 @@ const Components = () => {
   );
 };
 
-export default Components;
+export default Chat;
