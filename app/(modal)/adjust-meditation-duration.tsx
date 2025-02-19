@@ -41,17 +41,17 @@ const AdjustMeditationDuration = () => {
                         />
                         <CustomButton
                             title="5 minutes"
-                            onPress={() => handlePress(5 * 60)}
+                            onPress={() => handlePress(300)}
                             containerStyles="mb-5"
                         />
                         <CustomButton
                             title="10 minutes"
-                            onPress={() => handlePress(10 * 60)}
+                            onPress={() => handlePress(600)}
                             containerStyles="mb-5"
                         />
                         <CustomButton
                             title="15 minutes"
-                            onPress={() => handlePress(15 * 60)}
+                            onPress={() => handlePress(900)}
                             containerStyles="mb-5"
                         />
                     </View>
