@@ -38,9 +38,7 @@ const Page = () => {
                     ),
                 }}
             />
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
             <Tabs.Screen
                 name="chat"
                 options={{
@@ -50,20 +48,8 @@ const Page = () => {
                     ),
                 }}
             />
->>>>>>> 47bb661 (adding chat icon)
-=======
-            <Tabs.Screen
-                name="components"
-                options={{
-                    tabBarLabel: "Components",
-                    tabBarIcon: ({ color }) => (
-                        <Entypo name="map" size={24} color={color} />
-                    ),
-                }}
-            />
->>>>>>> parent of ff9dad0 (origin working branch)
         </Tabs>
     );
-};
+}
 
 export default Page;
