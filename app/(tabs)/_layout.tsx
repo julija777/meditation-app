@@ -38,6 +38,18 @@ const Page = () => {
                     ),
                 }}
             />
+<<<<<<< HEAD
+=======
+            <Tabs.Screen
+                name="chat"
+                options={{
+                    tabBarLabel: "Chat",
+                    tabBarIcon: ({ color }) => (
+                        <Entypo name="chat" size={24} color={color} />
+                    ),
+                }}
+            />
+>>>>>>> 47bb661 (adding chat icon)
         </Tabs>
     );
 };
