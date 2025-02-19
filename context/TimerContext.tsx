@@ -12,7 +12,7 @@ interface TimerContextProps {
 }
 
 export const TimerContext = createContext<TimerContextProps>({
-    duration: 10,
+    duration: 900,
     setDuration: () => {},
 });
 

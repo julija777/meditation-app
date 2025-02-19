@@ -38,15 +38,6 @@ const Page = () => {
                     ),
                 }}
             />
-            <Tabs.Screen
-                name="components"
-                options={{
-                    tabBarLabel: "Components",
-                    tabBarIcon: ({ color }) => (
-                        <Entypo name="map" size={24} color={color} />
-                    ),
-                }}
-            />
         </Tabs>
     );
 };
