@@ -8,9 +8,9 @@
         "scheme": "simplemeditation",
         "userInterfaceStyle": "light",
         "splash": {
-            "image": "./assets/simpleMeditationLogo.png",
+            "image": "./assets/SimpleMeditationAppCatLogo.png",
             "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
+            "backgroundColor": "#e0c6a6"
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
