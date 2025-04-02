@@ -54,6 +54,20 @@ Download the [Expo Go](https://expo.dev/go) app onto your device, then use it to
 **My Affirmations Chat in progress**
 
 <img src="https://github.com/user-attachments/assets/a9f092d2-5ef3-4c24-a217-43b04361b6aa" width="200">
-
-
+  <br/>
+    <br/>
+Updates on LLM implementation:
+  <br/>
+Added free (no credit card needed) Hugging Face LLM agent. 
+ <br/>
+Need to descover if I can choose the right dataset and limit the responses by prompts to meet the app specific needs.
+ <br/>
+Hugging Face is generally considered a safe and reliable platform for using machine learning models and tools in your projects. 
+It hosts a vast collection of pre-trained models, datasets, and libraries that can be easily integrated into various applications.
+ <br/>
+Hugging Face's LLM (Large Language Model) agents work by utilising pre-trained transformer models. 
+ <br/>
+These models are trained on massive amounts of text data and can perform various natural language processing tasks such as text generation, translation, and question answering. 
+ <br/>
+The agents use these models to understand and respond to user inputs, generate text, and interact with other tools or APIs.
 
