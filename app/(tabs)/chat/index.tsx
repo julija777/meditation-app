@@ -1,54 +1,80 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, ActivityIndicator } from 'react-native';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
-
 import Header from '@/components/Header/Header';
 import { router } from 'expo-router';
-import AFFIRMATION_GALLERY from '@/constants/affirmation-gallary';
-
+import { generateResponse, ChatMessage } from '@/services/llmService';
 
 const Chat = () => {
   const [messages, setMessages] = useState<IMessage[]>([]);
-
+  const [isLoading, setIsLoading] = useState(false);
   const userName = 'Julia';
 
   useEffect(() => {
     setMessages([
       {
         _id: 1,
-        text: 'Welcome to the Affirmations Chat! How can I inspire you today?',
+        text: 'Hello! I\'m your meditation assistant. How can I help you today?',
         createdAt: new Date(),
         user: {
           _id: 2,
-          name: 'Affirmation Bot',
+          name: 'Meditation Assistant',
           avatar: 'https://placeimg.com/140/140/any',
         },
       },
     ]);
   }, []);
 
-  const onSend = useCallback((newMessages: IMessage[] = []) => {
+  const onSend = useCallback(async (newMessages: IMessage[] = []) => {
     setMessages(previousMessages => GiftedChat.append(previousMessages, newMessages));
-    
-    setTimeout(() => {
-      const randomCategory = AFFIRMATION_GALLERY[Math.floor(Math.random() * AFFIRMATION_GALLERY.length)];
-      const randomAffirmation = randomCategory.data[Math.floor(Math.random() * randomCategory.data.length)];
-      
+    setIsLoading(true);
+
+    try {
+      // Convert messages to the format expected by the LLM service
+      const chatHistory: ChatMessage[] = messages.map(msg => ({
+        role: msg.user._id === 1 ? 'user' : 'assistant',
+        content: msg.text,
+      }));
+
+      // Add the new message
+      chatHistory.push({
+        role: 'user',
+        content: newMessages[0].text,
+      });
+
+      // Generate response
+      const response = await generateResponse(chatHistory);
+
+      // Add the bot's response
       const botMessage: IMessage = {
         _id: Math.round(Math.random() * 1000000),
-        text: randomAffirmation.text,
+        text: response,
         createdAt: new Date(),
         user: {
           _id: 2,
-          name: 'Affirmation Bot',
+          name: 'Meditation Assistant',
           avatar: 'https://placeimg.com/140/140/any',
         },
-        image: randomAffirmation.image,
       };
+
       setMessages(previousMessages => GiftedChat.append(previousMessages, [botMessage]));
-    }, 1000);
-  }, []);
-  
+    } catch (error) {
+      console.error('Error in chat:', error);
+      const errorMessage: IMessage = {
+        _id: Math.round(Math.random() * 1000000),
+        text: 'I apologize, but I encountered an error. Please try again.',
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'Meditation Assistant',
+          avatar: 'https://placeimg.com/140/140/any',
+        },
+      };
+      setMessages(previousMessages => GiftedChat.append(previousMessages, [errorMessage]));
+    } finally {
+      setIsLoading(false);
+    }
+  }, [messages]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -64,6 +90,12 @@ const Chat = () => {
         user={{
           _id: 1,
         }}
+        renderLoading={() => (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        )}
+        isLoadingEarlier={isLoading}
       />
       <Button
         title="Clear Chat"
